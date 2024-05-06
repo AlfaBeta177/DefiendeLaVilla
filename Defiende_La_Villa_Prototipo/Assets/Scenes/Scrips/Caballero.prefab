@@ -114,6 +114,8 @@ MonoBehaviour:
   HayAbajo: 0
   HayDerecha: 0
   HayIzquierda: 0
+  Seleccionada: 0
+  velocidadMovimiento: 0
   PuntoInicio: {fileID: 0}
 --- !u!61 &1160205153178808495
 BoxCollider2D:

@@ -11,18 +11,19 @@ public class Tropa : MonoBehaviour
     [SerializeField]
     GameObject ColisionArriba, ColisionAbajo, ColisionDerecha, ColisionIzquierda;
     [SerializeField]
-    bool HayArriba, HayAbajo, HayDerecha, HayIzquierda;
-
-
+    bool HayArriba, HayAbajo, HayDerecha, HayIzquierda, Seleccionada;
+    [SerializeField]
+    int velocidadMovimiento;
 
     [SerializeField]
     GameObject PuntoInicio; //Aparicion inicial
     private void Start()
     {
-        transform.position = PuntoInicio.transform.position;
+        //transform.position = PuntoInicio.transform.position;
     }
     private void Update()
     {
+        #region Elementos en la Casilla
         // Definir el área debajo de la ficha
         Vector2 centro = transform.position;
         Vector2 tamaño = new Vector2(1f, 0.1f); // Ajusta el tamaño según el tamaño de la ficha
@@ -39,7 +40,21 @@ public class Tropa : MonoBehaviour
             // No hay casilla debajo de la ficha
             Debug.Log("No hay casilla debajo de la ficha.");
         }
+        #endregion
+
+
+        //Movimiento
+        // Verificar entrada de teclado para mover la ficha
+        if (Seleccionada == true)
+        {
+
+        }
+
     }
+
+
+
+
 
     public void InformarCasillaAdyacente(bool SihayCasilla, string direccion)
     {
@@ -52,10 +67,10 @@ public class Tropa : MonoBehaviour
                 HayAbajo = SihayCasilla;
                 break;
             case "Izquierda":
-                HayDerecha = SihayCasilla;
+                HayIzquierda = SihayCasilla;
                 break;
             case "Derecha":
-                HayIzquierda = SihayCasilla;
+                HayDerecha = SihayCasilla;
                 break;
             default:
                 break;
@@ -67,6 +82,7 @@ public class Tropa : MonoBehaviour
     {
         // Se ejecuta cuando se hace clic en la casilla
         Debug.Log("¡Clic en la casilla detectado!");
+        Seleccionada = !Seleccionada;
     }
 
 
