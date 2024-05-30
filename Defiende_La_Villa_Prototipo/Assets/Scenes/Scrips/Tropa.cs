@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +8,21 @@ public class Tropa : MonoBehaviour
     public LayerMask capaDeCasillas; // Capa de las casillas que quieres detectar debajo de la ficha
     [SerializeField]
     Collider2D[] collidersDetectados;
-
+    
+    //Que hay alrededor
     [SerializeField]
     GameObject ColisionArriba, ColisionAbajo, ColisionDerecha, ColisionIzquierda;
     [SerializeField]
     bool HayArriba, HayAbajo, HayDerecha, HayIzquierda, Seleccionada;
+
+    //Casillas de movimiento
+    [SerializeField]
+    GameObject CasillaMovimiento;
+    //Stats
     [SerializeField]
     int velocidadMovimiento;
 
+    //Pocicion
     [SerializeField]
     GameObject PuntoInicio; //Aparicion inicial
     private void Start()
@@ -43,16 +51,36 @@ public class Tropa : MonoBehaviour
         #endregion
 
 
-        //Movimiento
-        // Verificar entrada de teclado para mover la ficha
-        if (Seleccionada == true)
-        {
-
-        }
-
     }
 
 
+    public void ITRMovimiento()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 posicion = new Vector3(transform.position.x + i, transform.position.y, 0);
+            Instantiate(CasillaMovimiento, posicion, Quaternion.identity);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 posicion = new Vector3(transform.position.x - i, transform.position.y, 0);
+            Instantiate(CasillaMovimiento, posicion, Quaternion.identity);
+        }
+
+
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 posicion = new Vector3(transform.position.x, transform.position.y + i, 0);
+            Instantiate(CasillaMovimiento, posicion, Quaternion.identity);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 posicion = new Vector3(transform.position.x, transform.position.y - i, 0);
+            Instantiate(CasillaMovimiento, posicion, Quaternion.identity);
+        }
+    }
 
 
 
@@ -83,6 +111,11 @@ public class Tropa : MonoBehaviour
         // Se ejecuta cuando se hace clic en la casilla
         Debug.Log("¡Clic en la casilla detectado!");
         Seleccionada = !Seleccionada;
+        if (Seleccionada == true)
+        {
+            ITRMovimiento();
+        }
+
     }
 
 

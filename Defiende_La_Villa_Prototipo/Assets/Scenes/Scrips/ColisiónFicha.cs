@@ -8,6 +8,7 @@ public class ColisiónFicha : MonoBehaviour
     public Tropa tropa;
     public LayerMask capaDeCasillas;
     Collider2D[] CasillaDetectada;
+    public bool Detectado;
 
     private void Update()
     {
@@ -20,17 +21,14 @@ public class ColisiónFicha : MonoBehaviour
         // Verificar si hay alguna casilla a tu alrededor.
         if (CasillaDetectada.Length > 0)
         {
+            Detectado = true;
             tropa.InformarCasillaAdyacente(true, direccion);
         }
         else
         {
+            Detectado = false;
             tropa.InformarCasillaAdyacente(false, direccion);
         }
     }
-
-
-
-
-
 
 }
